@@ -1,12 +1,10 @@
 package org.mobilefridge.api;
 
-import org.mobilefridge.model.Fridge;
+import org.mobilefridge.model.domain.objects.Fridge;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.Collection;
@@ -27,6 +25,10 @@ public class GettingFridgeController {
             fridgesMap = new HashMap<BigInteger, Fridge>();
             nextId = BigInteger.ONE;
         }
+        if(fridge.getId()!=null){
+            fridgesMap.get(fridge.getId()).setName(fridge.getName());
+            return fridge;
+        }
         fridge.setId(nextId);
         nextId = nextId.add(BigInteger.ONE);
         fridgesMap.put(fridge.getId(), fridge);
@@ -42,7 +44,7 @@ public class GettingFridgeController {
         save(f);
     }
 
-    @RequestMapping(value = "/api/getting_fridges",
+    @RequestMapping(value = "/api/get_all_fridges",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<Fridge>> getFridges() {
@@ -52,4 +54,27 @@ public class GettingFridgeController {
         return new ResponseEntity<Collection<Fridge>>(fridges, HttpStatus.OK);
 
     }
+    @RequestMapping(value = "/api/get_fridge/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Fridge> getFridge(@PathVariable("id") BigInteger id ) {
+
+
+        Fridge fridge= fridgesMap.get(id);
+
+        return new ResponseEntity<Fridge>(fridge, HttpStatus.OK);
+
+    }
+    @RequestMapping(value = "/api/add_fridge/",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+
+    public ResponseEntity<Fridge> getFridge(@RequestBody Fridge fridge ) {
+
+        Fridge savedFridge = save(fridge);
+        return new ResponseEntity<Fridge>(fridge, HttpStatus.CREATED);
+
+    }
+
 }

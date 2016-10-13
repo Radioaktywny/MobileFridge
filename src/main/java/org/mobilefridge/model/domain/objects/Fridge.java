@@ -1,4 +1,4 @@
-package org.mobilefridge.model;
+package org.mobilefridge.model.domain.objects;
 
 import java.math.BigInteger;
 
