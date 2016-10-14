@@ -1,4 +1,4 @@
-package org.mobilefridge.model.domain.objects;
+package org.mobilefridge.domain.objects;
 
 import java.math.BigInteger;
 
@@ -7,7 +7,7 @@ import java.math.BigInteger;
  */
 public class Fridge {
 
-    private BigInteger id;
+    private Long id;
     private String name;
 
     public Fridge() {
@@ -17,11 +17,11 @@ public class Fridge {
         this.name = name;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
