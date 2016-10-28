@@ -1,0 +1,1 @@
+INSERT INTO Account(username,password,settingsId) VALUES('marcin','haslo1234',NULL);

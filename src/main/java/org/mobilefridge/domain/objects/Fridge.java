@@ -1,13 +1,20 @@
 package org.mobilefridge.domain.objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.math.BigInteger;
 
 /**
  * Created by Marcin on 13.10.2016.
  */
+@Entity
 public class Fridge {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
     private String name;
 
     public Fridge() {

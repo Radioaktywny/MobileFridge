@@ -1,11 +1,11 @@
 package org.mobilefridge.service;
 
 import org.mobilefridge.domain.objects.Fridge;
+import org.mobilefridge.repository.FridgeReposotiry;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Marcin on 13.10.2016.
@@ -13,67 +13,48 @@ import java.util.Map;
 @Service
 public class FridgeServiceImpl implements FridgeService {
 
-    private static Long nextId;
-    private static Map<Long, Fridge> fridgesMap;
-
-    private static Fridge save(Fridge fridge) {
-        if (fridgesMap == null) {
-            fridgesMap = new HashMap<Long, Fridge>();
-            nextId = new Long(1);
-        }
-        if (fridge.getId() != null) {
-            fridgesMap.get(fridge.getId()).setName(fridge.getName());
-            return fridge;
-        }
-        fridge.setId(nextId);
-        nextId += 1;
-        fridgesMap.put(fridge.getId(), fridge);
-        return fridge;
-    }
-
-    private static boolean remove(Long id) {
-        Fridge deletedFridge = fridgesMap.remove(id);
-        if (deletedFridge == null) {
-            return false;
-        }
-        return true;
-    }
-
-    static {
-        Fridge f = new Fridge();
-        f.setName("fr1");
-        save(f);
-        f = new Fridge();
-        f.setName("f2");
-        save(f);
-    }
+    @Autowired
+    private FridgeReposotiry fridgeReposotiry;
 
     @Override
     public Collection<Fridge> findAll() {
-        Collection<Fridge> fridges = fridgesMap.values();
+        Collection<Fridge> fridges = fridgeReposotiry.findAll();
         return fridges;
     }
 
     @Override
     public Fridge findOne(Long id) {
-        Fridge fridge = fridgesMap.get(id);
+        Fridge fridge = fridgeReposotiry.findOne(id);
         return fridge;
     }
 
     @Override
     public Fridge create(Fridge fridge) {
-        Fridge savedFridge = save(fridge);
+        if(fridge.getId()!=null){
+            //cannot create greeting with specified id
+            return null;
+        }
+        Fridge savedFridge = fridgeReposotiry.save(fridge);
         return savedFridge;
     }
 
     @Override
     public Fridge update(Fridge fridge) {
-        Fridge updatedFridge = save(fridge);
+        Fridge fridgePersisted=findOne(fridge.getId());
+        if(fridgePersisted!=null){
+            //Cannot update fridge with specified id
+            return null;
+        }
+        Fridge updatedFridge = fridgeReposotiry.save(fridge);
         return updatedFridge;
     }
 
     @Override
     public boolean delete(Long id) {
-        return remove(id);
+        if(findOne(id)==null){
+            return false;
+        }
+        fridgeReposotiry.delete(id);
+        return true;
     }
 }
