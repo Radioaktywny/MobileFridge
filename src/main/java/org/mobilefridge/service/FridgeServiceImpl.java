@@ -1,6 +1,6 @@
 package org.mobilefridge.service;
 
-import org.mobilefridge.domain.objects.Fridge;
+import org.mobilefridge.objects.Fridge;
 import org.mobilefridge.repository.FridgeReposotiry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

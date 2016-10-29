@@ -1,6 +1,6 @@
 package org.mobilefridge.service;
 
-import org.mobilefridge.domain.objects.Fridge;
+import org.mobilefridge.objects.Fridge;
 
 import java.util.Collection;
 

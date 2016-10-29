@@ -1,6 +1,6 @@
 package org.mobilefridge.repository;
 
-import org.mobilefridge.domain.objects.Product;
+import org.mobilefridge.objects.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,6 @@
 package org.mobilefridge.service;
 
-import org.mobilefridge.domain.objects.AccountSettings;
-import org.mobilefridge.domain.objects.Product;
+import org.mobilefridge.objects.Product;
 
 /**
  * Created by Marcin on 28.10.2016.

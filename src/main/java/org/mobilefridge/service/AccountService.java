@@ -1,8 +1,6 @@
 package org.mobilefridge.service;
 
-import org.mobilefridge.domain.objects.Account;
-
-import java.util.Collection;
+import org.mobilefridge.objects.Account;
 
 /**
  * Created by Marcin on 28.10.2016.
@@ -10,7 +8,7 @@ import java.util.Collection;
 
 public interface AccountService {
 
-    Account findOne(Long id);
+    Account findByUsername(String username);
 
     Account create(Account account);
 

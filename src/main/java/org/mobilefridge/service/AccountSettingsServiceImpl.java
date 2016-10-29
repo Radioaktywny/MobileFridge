@@ -1,6 +1,6 @@
 package org.mobilefridge.service;
 
-import org.mobilefridge.domain.objects.AccountSettings;
+import org.mobilefridge.objects.AccountSettings;
 import org.springframework.stereotype.Service;
 
 /**

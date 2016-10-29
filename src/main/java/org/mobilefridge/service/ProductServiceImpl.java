@@ -1,6 +1,6 @@
 package org.mobilefridge.service;
 
-import org.mobilefridge.domain.objects.Product;
+import org.mobilefridge.objects.Product;
 import org.springframework.stereotype.Service;
 
 /**

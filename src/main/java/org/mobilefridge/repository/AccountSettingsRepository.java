@@ -1,6 +1,6 @@
 package org.mobilefridge.repository;
 
-import org.mobilefridge.domain.objects.AccountSettings;
+import org.mobilefridge.objects.AccountSettings;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

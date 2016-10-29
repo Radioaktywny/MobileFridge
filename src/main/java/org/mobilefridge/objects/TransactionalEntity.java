@@ -1,4 +1,4 @@
-package org.mobilefridge.domain.objects;
+package org.mobilefridge.objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

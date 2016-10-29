@@ -1,8 +1,12 @@
-package org.mobilefridge.domain.objects;
+package org.mobilefridge.objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Marcin on 13.10.2016.
@@ -14,8 +18,10 @@ public class Account {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String username;
 
+    @NotNull
     private String password;
 
     private Long settingsId;

@@ -1,6 +1,6 @@
 package org.mobilefridge.api;
 
-import org.mobilefridge.domain.objects.Fridge;
+import org.mobilefridge.objects.Fridge;
 import org.mobilefridge.service.FridgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
