@@ -1,1 +1,1 @@
-INSERT INTO Account(username,password,settings_id) VALUES('marcin','haslo1234',NULL);
+INSERT INTO Account(username,password,settings_id) VALUES('marcin','$2a$04$mvZTYDr/1E2AxFCqADPkeukCpSAVJvn9L9jxmCgrB/rtJjmcPz/ny',NULL);
