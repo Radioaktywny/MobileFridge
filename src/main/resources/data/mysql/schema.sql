@@ -1,9 +1,4 @@
-DROP TABLE IF EXISTS `AccountSettings`;
-DROP TABLE IF EXISTS `Product`;
-DROP TABLE IF EXISTS `Account`;
-DROP TABLE IF EXISTS `Fridge`;
-
-CREATE TABLE `Account` (
+CREATE TABLE IF NOT EXISTS `Account` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `username` varchar(100) NOT NULL,
   `password` varchar(200) NOT NULL,
@@ -12,7 +7,7 @@ CREATE TABLE `Account` (
   CONSTRAINT `UQ_Account_Username` UNIQUE (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `AccountSettings` (
+CREATE TABLE IF NOT EXISTS `AccountSettings` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `account_id` bigint(20) unsigned NOT NULL,
   `first_name` varchar(50) ,
@@ -22,13 +17,13 @@ CREATE TABLE `AccountSettings` (
   FOREIGN KEY  (`account_id`) REFERENCES Account(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `Fridge` (
+CREATE TABLE IF NOT EXISTS `Fridge` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `Product` (
+CREATE TABLE IF NOT EXISTS `Product` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `name` varchar(100) NOT NULL,
   `weight` int(4) NOT NULL,

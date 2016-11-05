@@ -3,7 +3,7 @@
  * Engineering project for studies on Cracow university of technology
  */
 
-package org.mobilefridge;
+package org.mobilefridge.conf;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

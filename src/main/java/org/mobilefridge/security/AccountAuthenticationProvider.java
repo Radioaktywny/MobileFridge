@@ -23,9 +23,9 @@ public class AccountAuthenticationProvider extends AbstractUserDetailsAuthentica
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AccountAuthenticationProvider(PasswordEncoder passwordEncoder, AccountUserDetalisService accountUserDetalisService) {
-        this.passwordEncoder = passwordEncoder;
+    public AccountAuthenticationProvider(AccountUserDetalisService accountUserDetalisService, PasswordEncoder passwordEncoder) {
         this.accountUserDetalisService = accountUserDetalisService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
