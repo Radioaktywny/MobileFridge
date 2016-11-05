@@ -4,24 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by Marcin on 28.10.2016.
- */
 
 @Component
 public class AccountAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-    @Autowired
-    private AccountUserDetalisService accountUserDetalisService;
+    private final AccountUserDetalisService accountUserDetalisService;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public AccountAuthenticationProvider(PasswordEncoder passwordEncoder, AccountUserDetalisService accountUserDetalisService) {
+        this.passwordEncoder = passwordEncoder;
+        this.accountUserDetalisService = accountUserDetalisService;
+    }
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken token)
@@ -38,7 +38,6 @@ public class AccountAuthenticationProvider extends AbstractUserDetailsAuthentica
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken token) throws AuthenticationException {
 
-        UserDetails userDetails = accountUserDetalisService.loadUserByUsername(username);
-        return userDetails;
+        return accountUserDetalisService.loadUserByUsername(username);
     }
 }

@@ -1,16 +1,18 @@
 package org.mobilefridge.objects;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * Created by Marcin on 28.10.2016.
- */
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+
 //@MappedSuperclass
-public class TransactionalEntity implements Serializable {
+class TransactionalEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -55,7 +57,7 @@ public class TransactionalEntity implements Serializable {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    private void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -63,13 +65,13 @@ public class TransactionalEntity implements Serializable {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    private void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     @Override
     public int hashCode() {
-        if(this.id==null){
+        if (this.id == null) {
             return -1;
         }
         return this.getId().hashCode();
@@ -77,7 +79,7 @@ public class TransactionalEntity implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null){
+        if (obj == null) {
             return false;
         }
         if (this.getClass().equals(obj.getClass())) {
@@ -91,13 +93,14 @@ public class TransactionalEntity implements Serializable {
         }
         return false;
     }
+
     @PrePersist
-    public void beforePersist(){
+    public void beforePersist() {
         setCreatedAt(new Date());
     }
 
     @PreUpdate
-    public void beforeUpdate(){
+    public void beforeUpdate() {
         setUpdatedAt(new Date());
     }
 }

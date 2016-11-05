@@ -1,12 +1,9 @@
 package org.mobilefridge.service;
 
-import org.mobilefridge.objects.Fridge;
-
 import java.util.Collection;
 
-/**
- * Created by Marcin on 13.10.2016.
- */
+import org.mobilefridge.objects.Fridge;
+
 public interface FridgeService {
 
     Collection<Fridge> findAll();

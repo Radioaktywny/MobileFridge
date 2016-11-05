@@ -1,9 +1,11 @@
 package org.mobilefridge.security;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.mobilefridge.objects.Account;
 import org.mobilefridge.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -12,28 +14,26 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 
-/**
- * Created by Marcin on 28.10.2016.
- */
 @Service
-public class AccountUserDetalisService implements UserDetailsService{
+public class AccountUserDetalisService implements UserDetailsService {
+
+    private final AccountService accountService;
 
     @Autowired
-    private AccountService accountService;
+    public AccountUserDetalisService(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountService.findByUsername(username);
-        if(account==null)
-        {
+        if (account == null) {
             return null;
         }
-        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
 
-        return new User(account.getUsername(), account.getPassword(), true, true, true, true, grantedAuthorities );
+        return new User(account.getUsername(), account.getPassword(), true, true, true, true, grantedAuthorities);
     }
 }

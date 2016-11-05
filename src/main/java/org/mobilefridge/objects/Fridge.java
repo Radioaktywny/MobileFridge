@@ -3,11 +3,7 @@ package org.mobilefridge.objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.math.BigInteger;
 
-/**
- * Created by Marcin on 13.10.2016.
- */
 @Entity
 public class Fridge {
 

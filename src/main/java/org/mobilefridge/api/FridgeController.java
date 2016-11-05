@@ -1,30 +1,36 @@
 package org.mobilefridge.api;
 
+import java.util.Collection;
+
 import org.mobilefridge.objects.Fridge;
 import org.mobilefridge.service.FridgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 
-/**
- * Created by Marcin on 13.10.2016.
- */
 @RestController
 public class FridgeController {
 
+    private final FridgeService fridgeService;
+
     @Autowired
-    private FridgeService fridgeService;
+    public FridgeController(FridgeService fridgeService) {
+        this.fridgeService = fridgeService;
+    }
 
     @RequestMapping(value = "/api/get_all_fridges",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<Fridge>> getFridges() {
         Collection<Fridge> fridges = fridgeService.findAll();
-        return new ResponseEntity<Collection<Fridge>>(fridges, HttpStatus.OK);
+        return new ResponseEntity<>(fridges, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/get_fridge/{id}",
@@ -32,7 +38,7 @@ public class FridgeController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Fridge> getFridge(@PathVariable("id") Long id) {
         Fridge fridge = fridgeService.findOne(id);
-        return new ResponseEntity<Fridge>(fridge, HttpStatus.OK);
+        return new ResponseEntity<>(fridge, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/add_fridge",
@@ -40,24 +46,24 @@ public class FridgeController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Fridge> createFridge(@RequestBody Fridge fridge) {
-        Fridge savedFridge = fridgeService.create(fridge);
-        return new ResponseEntity<Fridge>(fridge, HttpStatus.CREATED);
+        fridgeService.create(fridge);
+        return new ResponseEntity<>(fridge, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/api/update_fridge/{id}",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Fridge> updateFridge(@RequestBody Fridge fridge) {
+    public ResponseEntity<Fridge> updateFridge(@RequestBody Fridge fridge, @PathVariable("id") String id) {
         Fridge updatedFridge = fridgeService.update(fridge);
-        return new ResponseEntity<Fridge>(updatedFridge, HttpStatus.OK);
+        return new ResponseEntity<>(updatedFridge, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/update_fridge/{id}",
             method = RequestMethod.DELETE)
     public ResponseEntity<Fridge> deleteFridge(@PathVariable("id") Long id) {
-        return fridgeService.delete(id) ? new ResponseEntity<Fridge>(HttpStatus.NO_CONTENT)
-                : new ResponseEntity<Fridge>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return fridgeService.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 

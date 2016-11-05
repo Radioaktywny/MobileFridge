@@ -1,9 +1,10 @@
 package org.mobilefridge.util;
 
-/**
- * Created by Marcin on 28.10.2016.
- */
 public class RequestContext {
-    private static ThreadLocal<String> usernames = new ThreadLocal<String>();
+    private static ThreadLocal<String> usernames = new ThreadLocal<>();
+
+    public static void setUsername(String username) {
+        usernames.set(username);
+    }
     //TODO
 }
