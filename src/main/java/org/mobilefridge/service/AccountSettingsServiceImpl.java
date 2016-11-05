@@ -1,11 +1,13 @@
+/*
+ * Copyright (c) Marcin Witek 2016 / 2017
+ * Engineering project for studies on Cracow university of technology
+ */
+
 package org.mobilefridge.service;
 
 import org.mobilefridge.objects.AccountSettings;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by Marcin on 28.10.2016.
- */
 @Service
 public class AccountSettingsServiceImpl implements AccountSettingsService {
     @Override

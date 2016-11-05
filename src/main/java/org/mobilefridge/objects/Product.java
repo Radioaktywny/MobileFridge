@@ -1,12 +1,14 @@
+/*
+ * Copyright (c) Marcin Witek 2016 / 2017
+ * Engineering project for studies on Cracow university of technology
+ */
+
 package org.mobilefridge.objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-/**
- * Created by Marcin on 13.10.2016.
- */
 @Entity
 public class Product {
 
