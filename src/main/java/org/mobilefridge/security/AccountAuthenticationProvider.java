@@ -18,15 +18,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-    private final AccountUserDetalisService accountUserDetalisService;
-
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private AccountUserDetalisService accountUserDetalisService;
 
     @Autowired
-    public AccountAuthenticationProvider(AccountUserDetalisService accountUserDetalisService, PasswordEncoder passwordEncoder) {
-        this.accountUserDetalisService = accountUserDetalisService;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private PasswordEncoder passwordEncoder;
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken token)

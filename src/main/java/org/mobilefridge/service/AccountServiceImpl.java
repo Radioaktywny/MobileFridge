@@ -14,15 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-    private final AccountRepository accountRepository;
-
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
-    public AccountServiceImpl(PasswordEncoder passwordEncoder, AccountRepository accountRepository) {
-        this.passwordEncoder = passwordEncoder;
-        this.accountRepository = accountRepository;
-    }
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Account findByUsername(String username) {

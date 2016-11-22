@@ -23,12 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FridgeController {
 
-    private final FridgeService fridgeService;
-
     @Autowired
-    public FridgeController(FridgeService fridgeService) {
-        this.fridgeService = fridgeService;
-    }
+    private FridgeService fridgeService;
 
     @RequestMapping(value = "/api/get_all_fridges",
             method = RequestMethod.GET,

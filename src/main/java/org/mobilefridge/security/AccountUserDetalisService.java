@@ -23,12 +23,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountUserDetalisService implements UserDetailsService {
 
-    private final AccountService accountService;
-
     @Autowired
-    public AccountUserDetalisService(AccountService accountService) {
-        this.accountService = accountService;
-    }
+    private AccountService accountService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
