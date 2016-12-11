@@ -5,18 +5,29 @@
 
 package org.mobilefridge.objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Fridge {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     private String name;
+
+    @MapsId
+    @OneToOne
+    @JoinColumn(name="id")
+    private Account account;
+
+    @OneToMany(mappedBy = "fridge")
+    @JsonManagedReference
+    private Set<Product> productList;
 
     public Fridge() {
     }
@@ -35,5 +46,21 @@ public class Fridge {
 
     public String getName() {
         return name;
+    }
+
+    public Set<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(Set<Product> productList) {
+        this.productList = productList;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

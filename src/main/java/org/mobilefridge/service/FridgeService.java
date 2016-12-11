@@ -8,6 +8,7 @@ package org.mobilefridge.service;
 import java.util.Collection;
 
 import org.mobilefridge.objects.Fridge;
+import org.mobilefridge.objects.Product;
 
 public interface FridgeService {
 
@@ -20,6 +21,5 @@ public interface FridgeService {
     Fridge update(Fridge fridge);
 
     boolean delete(Long id);
-
 
 }

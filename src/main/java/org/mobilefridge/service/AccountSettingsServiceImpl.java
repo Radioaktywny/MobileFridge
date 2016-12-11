@@ -28,7 +28,7 @@ public class AccountSettingsServiceImpl implements AccountSettingsService {
     @Override
     public AccountSettings findByAccountName(String accountName) {
         Account account = accountService.findByUsername(accountName);
-        return accountSettingsRepository.findByAccountId(account.getId());
+        return account.getAccountSettings();
     }
 
     @Override

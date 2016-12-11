@@ -5,9 +5,9 @@
 
 package org.mobilefridge.objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -26,7 +26,15 @@ public class Account {
     @NotNull
     private String role;
 
-    private Long settingsId;
+    @OneToOne(cascade=CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    @JsonIgnore
+    private Fridge fridge;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    @JsonIgnore
+    private AccountSettings accountSettings;
 
     public Long getId() {
         return id;
@@ -52,13 +60,6 @@ public class Account {
         this.password = password;
     }
 
-    public Long getSettingsId() {
-        return settingsId;
-    }
-
-    public void setSettingsId(Long settingsId) {
-        this.settingsId = settingsId;
-    }
 
     public String getRole() {
         return role;
@@ -66,5 +67,21 @@ public class Account {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setFridge(Fridge fridge) {
+        this.fridge = fridge;
+    }
+
+    public Fridge getFridge() {
+        return fridge;
+    }
+
+    public AccountSettings getAccountSettings() {
+        return accountSettings;
+    }
+
+    public void setAccountSettings(AccountSettings accountSettings) {
+        this.accountSettings = accountSettings;
     }
 }

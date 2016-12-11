@@ -5,13 +5,12 @@
 
 package org.mobilefridge.objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 @Entity
 public class Product {
-
 
     @Id
     @GeneratedValue
@@ -21,7 +20,10 @@ public class Product {
 
     private int weight;
 
-    private Long fridgeId;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="fridge_id")
+    @JsonBackReference
+    private Fridge fridge;
 
     public Long getId() {
         return id;
@@ -47,13 +49,12 @@ public class Product {
         this.weight = weight;
     }
 
-    public Long getFridgeId() {
-        return fridgeId;
+
+    public Fridge getFridge() {
+        return fridge;
     }
 
-    public void setFridgeId(Long fridgeId) {
-        this.fridgeId = fridgeId;
+    public void setFridge(Fridge fridge) {
+        this.fridge = fridge;
     }
-
-
 }

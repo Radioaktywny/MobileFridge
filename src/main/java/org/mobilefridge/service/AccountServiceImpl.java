@@ -7,6 +7,7 @@ package org.mobilefridge.service;
 
 import org.mobilefridge.objects.Account;
 import org.mobilefridge.objects.AccountSettings;
+import org.mobilefridge.objects.Fridge;
 import org.mobilefridge.repository.AccountRepository;
 import org.mobilefridge.repository.AccountSettingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,6 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private AccountSettingsRepository accountSettingsRepository;
     @Override
     public Account findByUsername(String username) {
         return accountRepository.findByUsername(username);
@@ -36,10 +35,14 @@ public class AccountServiceImpl implements AccountService {
         }
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         account.setRole("USER");
+        if(accountRepository.findByUsername(account.getUsername())!=null)
+            return null;//TODO tutaj trzeba jakos to obsłużyć ze już istnieje takie konto o takiej nazwie np.
         AccountSettings accountSettings= new AccountSettings();
-        accountSettings.setAccountId(account.getId());
-        if(accountSettingsRepository.save(accountSettings)==null)
-            return null;
+        accountSettings.setAccount(account);
+        account.setAccountSettings(accountSettings);
+        Fridge fridge= new Fridge();
+        fridge.setAccount(account);
+        account.setFridge(fridge);
         return accountRepository.save(account);
     }
 

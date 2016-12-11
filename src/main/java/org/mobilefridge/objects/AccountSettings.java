@@ -5,9 +5,7 @@
 
 package org.mobilefridge.objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,13 +15,16 @@ public class AccountSettings {
     @GeneratedValue
     private Long id;
 
-    private Long accountId;
-
     private String firstName;
 
     private String lastName;
 
     private int age;
+
+    @MapsId
+    @OneToOne
+    @JoinColumn(name="account_id")
+    private Account account;
 
     public Long getId() {
         return id;
@@ -31,14 +32,6 @@ public class AccountSettings {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
     }
 
     public String getFirstName() {
@@ -66,4 +59,11 @@ public class AccountSettings {
     }
 
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }
