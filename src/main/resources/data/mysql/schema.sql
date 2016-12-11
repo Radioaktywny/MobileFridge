@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `Account` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
   `username` varchar(100) NOT NULL,
   `password` varchar(200) NOT NULL,
+  `role` varchar(10) NOT NULL,
   `settings_id` bigint(20) unsigned ,
   PRIMARY KEY (`id`),
   CONSTRAINT `UQ_Account_Username` UNIQUE (`username`)
@@ -13,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `AccountSettings` (
   `first_name` varchar(50) ,
   `last_name` varchar(100) ,
   `age` int(3) unsigned ,
+
   PRIMARY KEY (`id`),
   FOREIGN KEY  (`account_id`) REFERENCES Account(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

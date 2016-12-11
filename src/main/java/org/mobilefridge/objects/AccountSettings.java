@@ -8,6 +8,7 @@ package org.mobilefridge.objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class AccountSettings {
@@ -15,7 +16,6 @@ public class AccountSettings {
     @Id
     @GeneratedValue
     private Long id;
-//TODO tutaj trzeba dodac powiazanie z account id
 
     private Long accountId;
 
@@ -64,4 +64,6 @@ public class AccountSettings {
     public void setAge(int age) {
         this.age = age;
     }
+
+
 }

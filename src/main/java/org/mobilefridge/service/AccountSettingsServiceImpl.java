@@ -5,23 +5,39 @@
 
 package org.mobilefridge.service;
 
+import org.mobilefridge.objects.Account;
 import org.mobilefridge.objects.AccountSettings;
+import org.mobilefridge.repository.AccountSettingsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AccountSettingsServiceImpl implements AccountSettingsService {
+
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private AccountSettingsRepository accountSettingsRepository;
+
     @Override
     public AccountSettings findOne(Long id) {
-        return null;
+        return accountSettingsRepository.findOne(id);
+    }
+
+    @Override
+    public AccountSettings findByAccountName(String accountName) {
+        Account account = accountService.findByUsername(accountName);
+        return accountSettingsRepository.findByAccountId(account.getId());
     }
 
     @Override
     public AccountSettings create(AccountSettings accountSettings) {
-        return null;
+        return create(accountSettings);
     }
 
     @Override
     public AccountSettings update(AccountSettings accountSettings) {
-        return null;
+        return update(accountSettings);
     }
 }

@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountSettingsRepository extends JpaRepository<AccountSettings, Long> {
+    AccountSettings findByAccountId(Long id);
 }

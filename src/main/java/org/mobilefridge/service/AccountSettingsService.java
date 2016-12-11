@@ -8,8 +8,10 @@ package org.mobilefridge.service;
 import org.mobilefridge.objects.AccountSettings;
 
 public interface AccountSettingsService {
-    //TODO trzeba zadecydowac czy szukac np po id uzytkownika wtedy nie potrzebujemy id do servisu
+
     AccountSettings findOne(Long id);
+
+    AccountSettings findByAccountName(String accountName);
 
     AccountSettings create(AccountSettings accountSettings);
 

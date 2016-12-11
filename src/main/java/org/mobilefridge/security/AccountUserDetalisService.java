@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -27,14 +28,15 @@ public class AccountUserDetalisService implements UserDetailsService {
     private AccountService accountService;
 
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountService.findByUsername(username);
         if (account == null) {
             return null;
         }
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
+        grantedAuthorities.add(new SimpleGrantedAuthority(account.getRole()));
 
-        return new User(account.getUsername(), account.getPassword(), true, true, true, true, grantedAuthorities);
+        return new User(account.getUsername(), account.getPassword(), grantedAuthorities);
     }
 }

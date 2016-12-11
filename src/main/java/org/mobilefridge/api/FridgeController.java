@@ -60,7 +60,7 @@ public class FridgeController {
         return new ResponseEntity<>(updatedFridge, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/update_fridge/{id}",
+    @RequestMapping(value = "/api/delete_fridge/{id}",
             method = RequestMethod.DELETE)
     public ResponseEntity<Fridge> deleteFridge(@PathVariable("id") Long id) {
         return fridgeService.delete(id) ? new ResponseEntity<>(HttpStatus.NO_CONTENT)

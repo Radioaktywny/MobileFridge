@@ -23,6 +23,9 @@ public class Account {
     @NotNull
     private String password;
 
+    @NotNull
+    private String role;
+
     private Long settingsId;
 
     public Long getId() {
@@ -55,5 +58,13 @@ public class Account {
 
     public void setSettingsId(Long settingsId) {
         this.settingsId = settingsId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
