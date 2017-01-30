@@ -66,7 +66,7 @@ public class ProductController {
             method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Product>> get_produts(@RequestBody Product product, @PathVariable("userName") String userName) {
+    public ResponseEntity<Set<Product>> get_produts(@PathVariable("userName") String userName) {
         return new ResponseEntity<Set<Product>>(fridgeService.getProductListByUser(userName), HttpStatus.OK);
     }
 
