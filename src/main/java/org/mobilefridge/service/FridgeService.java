@@ -6,6 +6,7 @@
 package org.mobilefridge.service;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.mobilefridge.objects.Fridge;
 import org.mobilefridge.objects.Product;
@@ -22,4 +23,5 @@ public interface FridgeService {
 
     boolean delete(Long id);
 
+    Set<Product> getProductListByUser(String userName);
 }
