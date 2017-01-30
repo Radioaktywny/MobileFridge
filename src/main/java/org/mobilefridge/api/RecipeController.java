@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 
 /**
  * Created by Marcin on 30.01.2017.
@@ -31,8 +33,17 @@ public class RecipeController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity get_produts(@RequestBody Recipe recipe, @PathVariable("userName") String userName) {
+    public ResponseEntity addRecipe(@RequestBody Recipe recipe, @PathVariable("userName") String userName) {
         return new ResponseEntity<>(recipeService.createRecipe(recipe,userName), HttpStatus.CREATED);
-
     }
+
+    @RequestMapping(value = "/api/get_recipes",
+            method = RequestMethod.GET,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Recipe>> getRecipes() {
+        return new ResponseEntity<>(recipeService.getRecipes(), HttpStatus.OK);
+    }
+
+
 }

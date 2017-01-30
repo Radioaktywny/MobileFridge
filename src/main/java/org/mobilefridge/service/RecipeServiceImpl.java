@@ -10,6 +10,8 @@ import org.mobilefridge.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Marcin on 30.01.2017.
  */
@@ -26,5 +28,10 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe createRecipe(Recipe recipe, String username) {
         recipe.setAccount(accountService.findByUsername(username));
         return recipeRepository.save(recipe);
+    }
+
+    @Override
+    public List<Recipe> getRecipes() {
+        return recipeRepository.findAll();
     }
 }
