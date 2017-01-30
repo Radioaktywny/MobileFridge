@@ -35,23 +35,21 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product create(Product product, Long fridge_id) {
-        if(fridgeReposotiry.getOne(fridge_id) != null)
-        {
+        if (fridgeReposotiry.getOne(fridge_id) != null) {
 
-                    if(product.getGtin() != null) {
-                        //mogla by być weryfikacja tego
-                        JSONObject json = ProduktyZsieci.getJsonFromProduktyZsieci(product.getGtin());
-                        product.setIconBig(json.getString("IconBig"));
-                        product.setIconSmall(json.getString("IconSmall"));
-                        product.setWeight(json.getString("weight"));
-                        product.setWeightUnit(json.getString("weightUnit"));
-                        product.setName(json.getString("name"));
-                        product.setAddingTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
-                    }
-                    product.setFridge(fridgeReposotiry.getOne(fridge_id));
-        }
-        else return null;
-        return  productRepository.save(product);
+            if (product.getGtin() != null) {
+                //mogla by być weryfikacja tego
+                JSONObject json = ProduktyZsieci.getJsonFromProduktyZsieci(product.getGtin());
+                product.setIconBig(json.getString("IconBig"));
+                product.setIconSmall(json.getString("IconSmall"));
+                product.setWeight(json.getString("weight"));
+                product.setWeightUnit(json.getString("weightUnit"));
+                product.setName(json.getString("name"));
+                product.setAddingTime(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+            }
+            product.setFridge(fridgeReposotiry.getOne(fridge_id));
+        } else return null;
+        return productRepository.save(product);
     }
 
     @Override
