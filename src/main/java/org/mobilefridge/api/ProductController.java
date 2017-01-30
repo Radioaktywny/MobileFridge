@@ -43,11 +43,12 @@ public class ProductController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> add_product(@RequestBody Product product , @PathVariable("fridge_id") Long fridge_id) {
-        return new ResponseEntity<Product>(productService.create(product , fridge_id),
-                productService.create(product , fridge_id) == null ? HttpStatus.BAD_REQUEST : HttpStatus.CREATED);
-//        Collection<Product> products = productService.findByFridgeId(fridge_id);
-        //TODO musi istniec lodowka trzzbea zakodzic sprawdzanie cyz lodowka istnbieeje
-//        return new ResponseEntity<>(products, HttpStatus.OK);
+        {
+            Product product1 = productService.create(product ,fridge_id);
+            if(product1 !=null)
+            return new ResponseEntity<Product>(product1 , HttpStatus.CREATED);
+            return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(value = "/api/delete_product/{id}",
