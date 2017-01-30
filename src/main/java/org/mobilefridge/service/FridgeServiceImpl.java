@@ -6,8 +6,11 @@
 package org.mobilefridge.service;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.mobilefridge.objects.Fridge;
+import org.mobilefridge.objects.Product;
+import org.mobilefridge.repository.AccountRepository;
 import org.mobilefridge.repository.FridgeReposotiry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,9 @@ import org.springframework.stereotype.Service;
 public class FridgeServiceImpl implements FridgeService {
 
     private final FridgeReposotiry fridgeReposotiry;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
     public FridgeServiceImpl(FridgeReposotiry fridgeReposotiry) {
@@ -58,5 +64,11 @@ public class FridgeServiceImpl implements FridgeService {
         }
         fridgeReposotiry.delete(id);
         return true;
+    }
+
+    @Override
+    public Set<Product> getProductListByUser(String userName) {
+        return accountRepository.findByUsername(userName).getFridge().getProductList();
+
     }
 }
