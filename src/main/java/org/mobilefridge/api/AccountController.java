@@ -33,13 +33,12 @@ public class AccountController {
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/server/create_user",
+    @RequestMapping(value = "/server/create_user",//TODO:to powinien moc wywołać tylko user z rola admin
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
-        accountService.create(account);
-        return new ResponseEntity<>(account, HttpStatus.CREATED);
+        return new ResponseEntity<>(accountService.create(account), HttpStatus.CREATED);
     }
 
 }

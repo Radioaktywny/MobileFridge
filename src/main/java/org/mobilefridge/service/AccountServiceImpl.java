@@ -11,6 +11,7 @@ import org.mobilefridge.objects.Fridge;
 import org.mobilefridge.repository.AccountRepository;
 import org.mobilefridge.repository.AccountSettingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Account findByUsername(String username) {
@@ -34,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
             return null;
         }
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        account.setRole("USER");
+        account.setRole(account.getRole());
         if(accountRepository.findByUsername(account.getUsername())!=null)
             return null;//TODO tutaj trzeba jakos to obsłużyć ze już istnieje takie konto o takiej nazwie np.
         AccountSettings accountSettings= new AccountSettings();

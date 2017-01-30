@@ -13,9 +13,11 @@ public interface ProductService {
 
     Product findOne(Long id);
 
-    Product create(Product product);
+    Product create(Product product, Long fridge_id);
 
     Product update(Product product);
+
+    boolean delete(Long id);
 
     Collection<Product> findByFridgeId(Long fridge_id);
 }

@@ -65,6 +65,9 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `gtin` varchar(255) DEFAULT NULL,
+  `IconSmall` varchar(255) DEFAULT NULL,
+  `IconBig` varchar(255) DEFAULT NULL,
   `weight` int(11) NOT NULL,
   `fridge_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),

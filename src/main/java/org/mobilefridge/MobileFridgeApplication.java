@@ -12,5 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MobileFridgeApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(MobileFridgeApplication.class, args);
+        System.setProperty("httpRequestReadTimeout", "-1");
     }
 }

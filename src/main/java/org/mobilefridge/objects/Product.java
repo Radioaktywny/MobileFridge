@@ -18,10 +18,22 @@ public class Product {
 
     private String name;
 
-    private int weight;
+    private String weight;
+
+    private String gtin;
+
+    private String IconSmall;
+
+    private String IconBig;
+
+    private String weightUnit;
+
+    private String addingTime;
+
+
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fridge_id")
+    @JoinColumn(name="fridge_Id")
     @JsonBackReference
     private Fridge fridge;
 
@@ -41,11 +53,11 @@ public class Product {
         this.name = name;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
@@ -56,5 +68,53 @@ public class Product {
 
     public void setFridge(Fridge fridge) {
         this.fridge = fridge;
+    }
+
+
+    public String toString()
+    {
+    if(getFridge() !=null)
+        return "Id :" + getId()+" Name :" + getName() +" Weight :" + getWeight() +" fridge_Id" + getFridge().getId();
+    return "Id :" + getId()+" Name :" + getName() +" Weight :" + getWeight();
+    }
+
+    public String getGtin() {
+        return gtin;
+    }
+
+    public void setGtin(String gtin) {
+        this.gtin = gtin;
+    }
+
+    public String getIconSmall() {
+        return IconSmall;
+    }
+
+    public void setIconSmall(String iconSmall) {
+        IconSmall = iconSmall;
+    }
+
+    public String getIconBig() {
+        return IconBig;
+    }
+
+    public void setIconBig(String iconBig) {
+        IconBig = iconBig;
+    }
+
+    public String getWeightUnit() {
+        return weightUnit;
+    }
+
+    public void setWeightUnit(String weightUnit) {
+        this.weightUnit = weightUnit;
+    }
+
+    public String getAddingTime() {
+        return addingTime;
+    }
+
+    public void setAddingTime(String addingTime) {
+        this.addingTime = addingTime;
     }
 }
