@@ -6,8 +6,10 @@
 package org.mobilefridge.objects;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Marcin on 30.01.2017.
@@ -32,6 +34,10 @@ public class Recipe {
     @JoinColumn(name = "account_id")
     @JsonBackReference
     private Account account;
+
+    @OneToMany(mappedBy = "recipe")
+    @JsonManagedReference
+    private Set<RecipeRating> ratingList;
 
     public Long getId() {
         return id;
@@ -78,6 +84,11 @@ public class Recipe {
 
     public String getComponentsOfRecipe() {
         return componentsOfRecipe;
+    }
+
+
+    public Set<RecipeRating> getRatingList() {
+        return ratingList;
     }
 
 }

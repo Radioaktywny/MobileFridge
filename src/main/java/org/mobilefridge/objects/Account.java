@@ -6,9 +6,11 @@
 package org.mobilefridge.objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 public class Account {
@@ -35,6 +37,10 @@ public class Account {
     @PrimaryKeyJoinColumn
     @JsonIgnore
     private AccountSettings accountSettings;
+
+    @OneToMany(mappedBy = "account")
+    @JsonManagedReference
+    private Set<Recipe> recipeList;
 
     public Long getId() {
         return id;
@@ -83,5 +89,13 @@ public class Account {
 
     public void setAccountSettings(AccountSettings accountSettings) {
         this.accountSettings = accountSettings;
+    }
+
+    public Set<Recipe> getRecipeList() {
+        return recipeList;
+    }
+
+    public void setRecipeList(Set<Recipe> recipeList) {
+        this.recipeList = recipeList;
     }
 }
