@@ -32,7 +32,6 @@ public class RecipeRatingController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addRecipe(@RequestBody RecipeRating rating, @PathVariable("recipe_id") Long recipeId) {
-
         return new ResponseEntity<>(recipeRatingService.addRecipeRating(rating,recipeId), HttpStatus.CREATED);
     }
 }

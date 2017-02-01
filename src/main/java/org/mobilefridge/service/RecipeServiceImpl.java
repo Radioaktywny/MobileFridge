@@ -6,11 +6,14 @@
 package org.mobilefridge.service;
 
 import org.mobilefridge.objects.Recipe;
+import org.mobilefridge.objects.RecipeRating;
+import org.mobilefridge.repository.RecipeRatingRepository;
 import org.mobilefridge.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Marcin on 30.01.2017.
@@ -24,6 +27,9 @@ public class RecipeServiceImpl implements RecipeService {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    RecipeRatingService recipeRatingService;
+
     @Override
     public Recipe createRecipe(Recipe recipe, String username) {
         recipe.setAccount(accountService.findByUsername(username));
@@ -32,6 +38,15 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getRecipes() {
-        return recipeRepository.findAll();
+        List<Recipe> recipes = recipeRepository.findAll();
+        for (Recipe rec : recipes) {
+            Integer ratingValue = 0;
+            for (RecipeRating rating : rec.getRatingList().stream().collect(Collectors.toList())) {
+                ratingValue += rating.getRating();
+            }
+            ratingValue = ratingValue / Math.toIntExact(rec.getRatingList().stream().count());
+            rec.setRating(ratingValue);
+        }
+        return recipes;
     }
 }

@@ -39,6 +39,9 @@ public class Recipe {
     @JsonManagedReference
     private Set<RecipeRating> ratingList;
 
+    @Transient
+    private Integer rating;
+
     public Long getId() {
         return id;
     }
@@ -91,4 +94,15 @@ public class Recipe {
         return ratingList;
     }
 
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public void setRatingList(Set<RecipeRating> ratingList) {
+        this.ratingList = ratingList;
+    }
 }
