@@ -21,6 +21,8 @@ public class AccountSettings {
 
     private int age;
 
+    private String imageUrl;
+
     @MapsId
     @OneToOne
     @JoinColumn(name="account_id")
@@ -65,5 +67,13 @@ public class AccountSettings {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

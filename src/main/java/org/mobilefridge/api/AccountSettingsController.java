@@ -39,12 +39,11 @@ public class AccountSettingsController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AccountSettings> createFridge(@RequestBody AccountSettings accountSettings) {
+    public ResponseEntity<AccountSettings> saveAccountSettings(@RequestBody AccountSettings accountSettings) {
 
-        AccountSettings accountSettingsReturned=  accountSettingsService.update(accountSettings);
+        AccountSettings accountSettingsReturned = accountSettingsService.update(accountSettings);
         return new ResponseEntity<>(accountSettingsReturned, HttpStatus.CREATED);
     }
-
 
 
 }
