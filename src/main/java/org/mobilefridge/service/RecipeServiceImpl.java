@@ -46,9 +46,9 @@ public class RecipeServiceImpl implements RecipeService {
             if (Math.toIntExact(rec.getRatingList().stream().count()) > 0) {
                 ratingValue = ratingValue / Math.toIntExact(rec.getRatingList().stream().count());
                 rec.setRating(ratingValue);
+            } else {
+                rec.setRating(0);
             }
-            rec.setRating(0);
-
         }
         return recipes;
     }
