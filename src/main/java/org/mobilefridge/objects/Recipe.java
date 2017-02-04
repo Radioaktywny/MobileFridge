@@ -42,8 +42,6 @@ public class Recipe {
     @Transient
     private Integer rating;
 
-    private String imageUrl;
-
     public Long getId() {
         return id;
     }
@@ -108,11 +106,4 @@ public class Recipe {
         this.ratingList = ratingList;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

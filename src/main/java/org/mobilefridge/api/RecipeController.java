@@ -34,7 +34,7 @@ public class RecipeController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addRecipe(@RequestBody Recipe recipe, @PathVariable("userName") String userName) {
-        return new ResponseEntity<>(recipeService.createRecipe(recipe,userName), HttpStatus.CREATED);
+        return new ResponseEntity<>(recipeService.createRecipe(recipe, userName), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/api/get_recipes",
@@ -43,6 +43,14 @@ public class RecipeController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Recipe>> getRecipes() {
         return new ResponseEntity<>(recipeService.getRecipes(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/api/update_recipe/{id}",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity updateRecipe(@RequestBody Recipe recipe, @PathVariable("id") Long id) {
+        return new ResponseEntity<>(recipeService.updateRecipe(recipe, id), HttpStatus.OK);
     }
 
 

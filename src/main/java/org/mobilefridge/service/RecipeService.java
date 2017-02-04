@@ -17,4 +17,6 @@ public interface RecipeService {
     Recipe createRecipe(Recipe recipe, String username);
 
     List<Recipe> getRecipes();
+
+    Recipe updateRecipe(Recipe recipe, Long id);
 }
