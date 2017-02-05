@@ -37,7 +37,13 @@ public class AccountSettingsServiceImpl implements AccountSettingsService {
     }
 
     @Override
-    public AccountSettings update(AccountSettings accountSettings) {
-        return update(accountSettings);
+    public AccountSettings update(AccountSettings accountSettings, String accountName) {
+        Account account = accountService.findByUsername(accountName);
+        AccountSettings accountSettingsToUpdate = account.getAccountSettings();
+        accountSettingsToUpdate.setFirstName(accountSettings.getFirstName());
+        accountSettingsToUpdate.setAge(accountSettings.getAge());
+        accountSettingsToUpdate.setLastName(accountSettings.getLastName());
+        accountSettingsToUpdate.setImageUrl(accountSettings.getImageUrl());
+        return accountSettingsRepository.save(accountSettingsToUpdate);
     }
 }

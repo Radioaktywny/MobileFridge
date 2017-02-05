@@ -15,5 +15,5 @@ public interface AccountSettingsService {
 
     AccountSettings create(AccountSettings accountSettings);
 
-    AccountSettings update(AccountSettings accountSettings);
+    AccountSettings update(AccountSettings accountSettings, String accountName);
 }

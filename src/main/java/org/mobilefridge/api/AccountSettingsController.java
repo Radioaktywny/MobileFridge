@@ -35,13 +35,14 @@ public class AccountSettingsController {
         return new ResponseEntity<>(accountSettings, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/save_account_settings",
+    @RequestMapping(value = "/api/save_account_settings/{username}",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AccountSettings> saveAccountSettings(@RequestBody AccountSettings accountSettings) {
+    public ResponseEntity<AccountSettings> saveAccountSettings(@RequestBody AccountSettings accountSettings,
+                                                               @PathVariable("username") String username) {
 
-        AccountSettings accountSettingsReturned = accountSettingsService.update(accountSettings);
+        AccountSettings accountSettingsReturned = accountSettingsService.update(accountSettings, username);
         return new ResponseEntity<>(accountSettingsReturned, HttpStatus.CREATED);
     }
 
